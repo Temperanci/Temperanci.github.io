@@ -155,6 +155,124 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/18/4-18%E6%AF%8F%E6%97%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Chris Temper">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi! Have a good day!">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/18/4-18%E6%AF%8F%E6%97%A5/" class="post-title-link" itemprop="url">4-18每日</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-04-18 22:12:24 / 修改时间：22:13:26" itemprop="dateCreated datePublished" datetime="2023-04-18T22:12:24+08:00">2023-04-18</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1026-节点与其祖先之间的最大差值"><a href="#1026-节点与其祖先之间的最大差值" class="headerlink" title="1026. 节点与其祖先之间的最大差值"></a>1026. 节点与其祖先之间的最大差值</h1><p>给定二叉树的根节点 <code>root</code>，找出存在于 <strong>不同</strong> 节点 <code>A</code> 和 <code>B</code> 之间的最大值 <code>V</code>，其中 <code>V = |A.val - B.val|</code>，且 <code>A</code> 是 <code>B</code> 的祖先。</p>
+<p>（如果 A 的任何子节点之一为 B，或者 A 的任何子节点是 B 的祖先，那么我们认为 A 是 B 的祖先）</p>
+<p><strong>示例 1：</strong></p>
+<p><img src="https://assets.leetcode.com/uploads/2020/11/09/tmp-tree.jpg" alt="img"></p>
+<pre><code>输入：root = [8,3,10,1,6,null,14,null,null,4,7,13]
+输出：7
+解释： 
+我们有大量的节点与其祖先的差值，其中一些如下：
+|8 - 3| = 5
+|3 - 7| = 4
+|8 - 1| = 7
+|10 - 13| = 3
+在所有可能的差值中，最大值 7 由 |8 - 1| = 7 得出。
+</code></pre>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> maxAncestorDiff <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> result <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> 
+        V<span class="token punctuation">:</span> <span class="token number">0</span> 
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 记录最大差值</span>
+    <span class="token function">dfs</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span> result<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> result<span class="token punctuation">.</span>V<span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">dfs</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span> result<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>root<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> max<span class="token punctuation">:</span> <span class="token operator">-</span><span class="token number">Infinity</span><span class="token punctuation">,</span> min<span class="token punctuation">:</span> <span class="token number">Infinity</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">let</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> max<span class="token punctuation">:</span> maxLeft<span class="token punctuation">,</span> min<span class="token punctuation">:</span> minLeft <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token operator">=</span> <span class="token function">dfs</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>left<span class="token punctuation">,</span> result<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 左子节点的最大值和最小值</span>
+    <span class="token keyword">let</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> max<span class="token punctuation">:</span> maxRight<span class="token punctuation">,</span> min<span class="token punctuation">:</span> minRight <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token operator">=</span> <span class="token function">dfs</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>right<span class="token punctuation">,</span> result<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 右子节点的最大值和最小值</span>
+    
+    <span class="token comment" spellcheck="true">// 计算当前节点子树中的最大值和最小值</span>
+    <span class="token keyword">let</span> maxVal <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>val<span class="token punctuation">,</span> maxLeft<span class="token punctuation">,</span> maxRight<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">let</span> minVal <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">min</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>val<span class="token punctuation">,</span> minLeft<span class="token punctuation">,</span> minRight<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token comment" spellcheck="true">// 更新最大值</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>root<span class="token punctuation">.</span>left<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">let</span> diff <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">abs</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>val <span class="token operator">-</span> minLeft<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>diff <span class="token operator">></span> result<span class="token punctuation">.</span>V<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            result<span class="token punctuation">.</span>V <span class="token operator">=</span> diff<span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        diff <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">abs</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>val <span class="token operator">-</span> maxLeft<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>diff <span class="token operator">></span> result<span class="token punctuation">.</span>V<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            result<span class="token punctuation">.</span>V <span class="token operator">=</span> diff<span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>root<span class="token punctuation">.</span>right<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">let</span> diff <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">abs</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>val <span class="token operator">-</span> minRight<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>diff <span class="token operator">></span> result<span class="token punctuation">.</span>V<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            result<span class="token punctuation">.</span>V <span class="token operator">=</span> diff<span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        diff <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">abs</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>val <span class="token operator">-</span> maxRight<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>diff <span class="token operator">></span> result<span class="token punctuation">.</span>V<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            result<span class="token punctuation">.</span>V <span class="token operator">=</span> diff<span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">return</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> max<span class="token punctuation">:</span> maxVal<span class="token punctuation">,</span> min<span class="token punctuation">:</span> minVal <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+</code></pre>
+<p>如果直接使用 <code>result = 0</code> 来初始化结果，则会导致 <code>result</code> 存储的是一个数字，而不是一个对象。这样在 DFS 遍历过程中，我们无法直接修改 <code>result</code> 的值，而需要额外声明一个变量来保存最大差值。具体来说，我们需要在递归函数的返回值中返回最大差值，然后在计算当前节点的最大差值时，将递归返回的最大差值和当前节点的差值进行比较，取两者中的较大值作为新的最大差值。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/17/4-17%E6%AF%8F%E6%97%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1170,7 +1288,7 @@ public:
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
