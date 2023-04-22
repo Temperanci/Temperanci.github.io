@@ -155,6 +155,181 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/22/4-22%E7%BE%8E%E5%9B%A2%E7%AC%94%E8%AF%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Chris Temper">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi! Have a good day!">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/22/4-22%E7%BE%8E%E5%9B%A2%E7%AC%94%E8%AF%95/" class="post-title-link" itemprop="url">4-22美团笔试</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-04-22 23:27:13 / 修改时间：23:59:20" itemprop="dateCreated datePublished" datetime="2023-04-22T23:27:13+08:00">2023-04-22</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="4-22美团笔试"><a href="#4-22美团笔试" class="headerlink" title="4-22美团笔试"></a>4-22美团笔试</h1><p>19：00 - 21：00 第二个算法题没写出来，估摸着也寄了</p>
+<p>20个专业单选	10个应用算术题	2个编程题</p>
+<h2 id="1-单选"><a href="#1-单选" class="headerlink" title="1. 单选"></a>1. 单选</h2><ol>
+<li>作业调度</li>
+<li>二叉树中序&#x2F;后序遍历</li>
+<li>同步请求</li>
+<li>大数据量高并发如何缓解</li>
+<li>SQL</li>
+<li>进程 并发性</li>
+<li>查找效率</li>
+<li>epoll 查找元素的时间复杂度：O(1)</li>
+<li>BFS</li>
+<li>适配器模式本质</li>
+<li>递归成立的条件</li>
+<li>SQL</li>
+<li>图 连通图</li>
+<li>水题</li>
+<li>表字段 NULL</li>
+<li>ARP协议 单播 广播</li>
+<li>辗转相除</li>
+<li>信号量可用资源</li>
+<li>GDB打印元素</li>
+<li>IMAP协议</li>
+</ol>
+<h2 id="2-算法题"><a href="#2-算法题" class="headerlink" title="2. 算法题"></a>2. 算法题</h2><h3 id="1-计算水题"><a href="#1-计算水题" class="headerlink" title="1. 计算水题"></a>1. 计算水题</h3><p>好久没写 C++ 了，要注意多个变量初始化的时候记得分开写。</p>
+<p>√：</p>
+<pre><code>double up = 0, down = 0;
+</code></pre>
+<p>X：</p>
+<pre><code>double up, down = 0;
+</code></pre>
+<p>写 js 写习惯了是这样的。</p>
+<pre class=" language-c++"><code class="language-c++">#include <iostream>
+using namespace std;
+int point[2000];
+int score[2000];
+
+int main()
+&#123;
+  int T;
+  scanf ("%d", &T);
+  while (T--) &#123;
+    int n, x = 0;
+    scanf("%d%d", &n, &x);
+    for (int i = 0; i < n; ++i) &#123;
+        scanf ("%d", &point[i]);
+    &#125;
+    for (int i = 0; i < n; ++i) &#123;
+        scanf ("%d", &score[i]);
+    &#125;
+
+    bool flag;
+    flag = true;
+    double up = 0, down = 0;
+    for (int i = 0; i < n; ++i) &#123;
+        if (score[i] < 60) &#123;
+            flag = false;
+            break;
+        &#125;
+    &#125;
+    if (flag == false) &#123;
+        printf("No\n");
+        continue;
+    &#125;
+    for (int i = 0; i < n; ++i) &#123;
+        up += point[i] * score[i];
+        down += point[i];
+    &#125;
+    double res = up / down;
+    if (res >= x) &#123;
+        printf("Yes\n");
+        continue;
+    &#125; else &#123;
+        printf("No\n");
+    &#125;
+  &#125;;
+  return 0;
+&#125;
+</code></pre>
+<h3 id="2-完全背包问题"><a href="#2-完全背包问题" class="headerlink" title="2. 完全背包问题"></a>2. 完全背包问题</h3><p>n种作物，m的时间，接下来三行</p>
+<p>第一行t，表示每种作物成熟所需时间</p>
+<p>第二行a，表示作物成本</p>
+<p>第三行b，表示卖出作物的价格</p>
+<p>输出最大收益</p>
+<p>c[i]&#x3D;b[i]-a[i]表示单一作物的收益</p>
+<p>f[i][j]表示可以选择前i种作物，总时间为j的情况下的最优解</p>
+<p>f[n] [m]&#x3D;&#x3D;&gt;最终结果</p>
+<p>f[ 0 ] [j]&#x3D;0<br>f[i][0]&#x3D;0</p>
+<p>状态转移方程<br>f[i][j]&#x3D;max(f [ i - 1 ] [ j ],c[i]+f[i][j-t[i]])</p>
+<p>计算第i行的时候，确定的是第i种作物种几个<br>决策：	0&#x2F;1	01背包<br>    k	完全背包</p>
+<p>for i&#x3D;1..n<br>    for j&#x3D;1..m<br>        f[i][j]&#x3D;k* c[i]+f[ i-1 ] [j-k * t[i]]</p>
+<p>把第三次循环的 k 优化掉了，原因是不需要计算同一行前一个已经计算过的冗余部分，直接拿前一个的计算结果即可，因为前面计算过的已经找到了最优的解。</p>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><pre class=" language-C++"><code class="language-C++">#include <iostream>
+using namespace std;
+
+int main() &#123;
+    int n, V;
+    cin >> n >> V;
+
+    int w[n+1], v[n+1];
+    for (int i = 1; i <= n; i++) &#123;
+        cin >> w[i] >> v[i];
+    &#125;
+
+    int dp[V+1];
+    memset(dp, 0, sizeof(dp));
+
+    for (int i = 1; i <= n; i++) &#123;
+        for (int j = w[i]; j <= V; j++) &#123;
+            dp[j] = max(dp[j], dp[j-w[i]] + v[i]);
+        &#125;
+    &#125;
+
+    cout << dp[V] << endl;
+    return 0;
+&#125;
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/22/4-22%E6%AF%8F%E6%97%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1256,100 +1431,6 @@ T I T .
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/11/46-%E5%85%A8%E6%8E%92%E5%88%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Chris Temper">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi! Have a good day!">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/04/11/46-%E5%85%A8%E6%8E%92%E5%88%97/" class="post-title-link" itemprop="url">46. 全排列</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-04-11 17:26:02 / 修改时间：17:27:07" itemprop="dateCreated datePublished" datetime="2023-04-11T17:26:02+08:00">2023-04-11</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="46-全排列"><a href="#46-全排列" class="headerlink" title="46. 全排列"></a>46. 全排列</h2><p>给定一个不含重复数字的数组 <code>nums</code> ，返回其 <em>所有可能的全排列</em> 。你可以 <strong>按任意顺序</strong> 返回答案。</p>
-<p><strong>示例 1：</strong></p>
-<pre><code>输入：nums = [1,2,3]
-输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
-</code></pre>
-<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">/**
- * @param &amp;#123;number[]&amp;#125; nums
- * @return &amp;#123;number[][]&amp;#125;
- */</span>
-<span class="token keyword">var</span> permute <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>nums<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token keyword">const</span> n <span class="token operator">=</span> nums<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
-    <span class="token keyword">const</span> used <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Array</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">fill</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 记录每个元素是否已被使用过</span>
-    <span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-
-    <span class="token keyword">function</span> <span class="token function">dfs</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>path<span class="token punctuation">.</span>length <span class="token operator">===</span> n<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 如果路径中的元素个数等于 n，表示已经找到一组解</span>
-            result<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token operator">...</span>path<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 将路径中的元素加入结果数组</span>
-            <span class="token keyword">return</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>used<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 如果元素未被使用过</span>
-                path<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 将其加入路径</span>
-                used<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 标记元素已被使用</span>
-                <span class="token function">dfs</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 继续搜索下一个元素</span>
-                used<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 恢复现场</span>
-                path<span class="token punctuation">.</span><span class="token function">pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 回溯</span>
-            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-
-    <span class="token function">dfs</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> result<span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
-</code></pre>
-<p>递归真难啊</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1419,7 +1500,7 @@ T I T .
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
