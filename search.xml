@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>4-24每日</title>
+      <link href="/2023/04/24/4-24%E6%AF%8F%E6%97%A5/"/>
+      <url>/2023/04/24/4-24%E6%AF%8F%E6%97%A5/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1163-按字典序排在最后的子串"><a href="#1163-按字典序排在最后的子串" class="headerlink" title="1163. 按字典序排在最后的子串"></a>1163. 按字典序排在最后的子串</h1><p>&#x3D;&#x3D;Hard&#x3D;&#x3D;</p><p>给你一个字符串 <code>s</code> ，找出它的所有子串并按字典序排列，返回排在最后的那个子串。</p><p><strong>示例 1：</strong></p><pre><code>输入：s = &quot;abab&quot;输出：&quot;bab&quot;解释：我们可以找出 7 个子串 [&quot;a&quot;, &quot;ab&quot;, &quot;aba&quot;, &quot;abab&quot;, &quot;b&quot;, &quot;ba&quot;, &quot;bab&quot;]。按字典序排在最后的子串是 &quot;bab&quot;。</code></pre><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>我们注意到，如果一个子串从位置 iii 开始，那么字典序最大的子串一定是 $s[i,..n−1]$，即从位置 $i$ 开始的最长后缀。因此，我们只需要找出字典序最大的后缀子串即可。</p><p>我们使用双指针 $i$ 和 $j$，其中指针 $i$ 指向当前字典序最大的子串的起始位置，指针 $j$ 指向当前考虑的子串的起始位置。另外，用一个变量 $k$ 记录当前比较到的位置。初始时 $i&#x3D;0, j&#x3D;1, k&#x3D;0$。</p><p>每一次，我们比较 $s[i+k]$ 和 $s[j+k]$：</p><p>如果 $s[i+k]&#x3D;s[j+k]$，说明 $s[i,..i+k]$ 和 $s[j,..j+k]$ 相同，我们将 $k$ 加 1，继续比较 $s[i+k]$ 和 $s[j+k]$；</p><p>如果 $s[i+k]&lt;s[j+k]$，说明 $s[j,..j+k]$ 的字典序更大。此时，我们更新 $i&#x3D;i+k+1$，并将 $k$ 重置为 0。如果此时 $i≥j$，那么我们将指针 $j$ 更新为 $i+1$，即 $j&#x3D;i+1$。这里我们跳过了以 $s[i,..,i+k]$ 为起始位置的所有后缀子串，因为它们的字典序一定小于对应的 $s[j,..,j+k]$ 为起始位置的后缀子串。</p><p>同理，如果 $s[i+k]&gt;s[j+k]$，说明 $s[i,..,i+k]$ 的字典序更大。此时，我们更新 $j&#x3D;j+k+1$，并将 $k$ 重置为 0。这里我们跳过了以 $s[j,..,j+k]$ 为起始位置的所有后缀子串，因为它们的字典序一定小于对应的 $s[i,..,i+k]$ 为起始位置的后缀子串。</p><p>最后，我们返回以 $i$ 为起始位置的后缀子串即可，即 $s[i,..,n−1]$。</p><p><a href="https://leetcode.cn/problems/last-substring-in-lexicographical-order/solutions/2242562/python3javacgotypescript-yi-ti-yi-jie-sh-3amj/">https://leetcode.cn/problems/last-substring-in-lexicographical-order/solutions/2242562/python3javacgotypescript-yi-ti-yi-jie-sh-3amj/</a></p><pre class=" language-c++"><code class="language-c++">class Solution &#123;public:    string lastSubstring(string s) &#123;        int n = s.size();        int i = 0, j = 1, k = 0;                // 遍历所有可能的子串起始位置 i 和 j        while (j + k < n) &#123;            if (s[i + k] == s[j + k]) &#123;     // 如果相同，则继续比较后面的字符                k++;                continue;            &#125; else if (s[i + k] < s[j + k]) &#123; // 如果 s[i + k] < s[j + k]，i 跳到 j+1，k 置为 0                i += k + 1;                k = 0;                if (i >= j) &#123;               // 如果发现 i 已经超过[j,n)了，就更新 j=i+1                    j = i + 1;                &#125;            &#125; else &#123;                        // 如果 s[i + k] > s[j + k]，j 跳到下一个后缀的起始位置 k+1,j                j += k + 1;                 // 跳到下一个后缀的起点                k = 0;                      // k 重新置为0            &#125;        &#125;        return s.substr(i);                 // 返回最后一个子串    &#125;&#125;;</code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> leetcode </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>4-23每日</title>
       <link href="/2023/04/23/4-23%E6%AF%8F%E6%97%A5/"/>
       <url>/2023/04/23/4-23%E6%AF%8F%E6%97%A5/</url>
