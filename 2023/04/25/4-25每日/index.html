@@ -20,15 +20,20 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hi! Have a good day!">
-<meta property="og:url" content="http://example.com/archives/2022/10/index.html">
+  <meta name="description" content="2418. 按身高排序&#x3D;&#x3D;Easy&#x3D;&#x3D; 给你一个字符串数组 names ，和一个由 互不相同 的正整数组成的数组 heights 。两个数组的长度均为 n 。 对于每个下标 i，names[i] 和 heights[i] 表示第 i 个人的名字和身高。 请按身高 降序 顺序返回对应的名字数组 names 。 示例 1： 输入：names &#x3D; [&quot;M">
+<meta property="og:type" content="article">
+<meta property="og:title" content="4-25每日">
+<meta property="og:url" content="http://example.com/2023/04/25/4-25%E6%AF%8F%E6%97%A5/index.html">
 <meta property="og:site_name" content="Hi! Have a good day!">
+<meta property="og:description" content="2418. 按身高排序&#x3D;&#x3D;Easy&#x3D;&#x3D; 给你一个字符串数组 names ，和一个由 互不相同 的正整数组成的数组 heights 。两个数组的长度均为 n 。 对于每个下标 i，names[i] 和 heights[i] 表示第 i 个人的名字和身高。 请按身高 降序 顺序返回对应的名字数组 names 。 示例 1： 输入：names &#x3D; [&quot;M">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-25T05:58:59.000Z">
+<meta property="article:modified_time" content="2023-04-25T06:07:55.614Z">
 <meta property="article:author" content="Chris Temper">
+<meta property="article:tag" content="leetcode">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/archives/2022/10/">
+<link rel="canonical" href="http://example.com/2023/04/25/4-25%E6%AF%8F%E6%97%A5/">
 
 
 <script id="page-configurations">
@@ -36,12 +41,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>归档 | Hi! Have a good day!</title>
+  <title>4-25每日 | Hi! Have a good day!</title>
   
 
 
@@ -149,70 +154,118 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 19 篇日志。 继续努力。</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/25/4-25%E6%AF%8F%E6%97%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Chris Temper">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi! Have a good day!">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          4-25每日
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-04-25 13:58:59 / 修改时间：14:07:55" itemprop="dateCreated datePublished" datetime="2023-04-25T13:58:59+08:00">2023-04-25</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2022</span>
-    </div>
+        <h1 id="2418-按身高排序"><a href="#2418-按身高排序" class="headerlink" title="2418. 按身高排序"></a>2418. 按身高排序</h1><p>&#x3D;&#x3D;Easy&#x3D;&#x3D;</p>
+<p>给你一个字符串数组 <code>names</code> ，和一个由 <strong>互不相同</strong> 的正整数组成的数组 <code>heights</code> 。两个数组的长度均为 <code>n</code> 。</p>
+<p>对于每个下标 <code>i</code>，<code>names[i]</code> 和 <code>heights[i]</code> 表示第 <code>i</code> 个人的名字和身高。</p>
+<p>请按身高 <strong>降序</strong> 顺序返回对应的名字数组 <code>names</code> 。</p>
+<p><strong>示例 1：</strong></p>
+<pre><code>输入：names = [&quot;Mary&quot;,&quot;John&quot;,&quot;Emma&quot;], heights = [180,165,170]
+输出：[&quot;Mary&quot;,&quot;Emma&quot;,&quot;John&quot;]
+解释：Mary 最高，接着是 Emma 和 John 。
+</code></pre>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>新开一个数组 ，以序数对应 <code>names</code> 数组，值对应 <code>height</code> 数组。</p>
+<p>用选择排序更新 <code>height</code> 的值，同时更新 <code>idx[i]</code> 的值。</p>
+<p>最后更新 <code>names</code> 数组即可。</p>
+<pre class=" language-C++"><code class="language-C++">vector<string> sortNames(vector<string>& names, vector<int>& heights) &#123;
+    int n = heights.size(); // 记录人数
+    vector<int> idx(n); // 建立长度为 n 的下标数组
+    for (int i = 0; i < n; i++) &#123;
+        idx[i] = i; // 将下标数组初始化为 [0, 1, 2, ..., n-1]
+    &#125;
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    // 选择排序 heights，并记录下标变化
+    for (int i = 0; i < n - 1; i++) &#123; // 循环 n-1 次
+        int max_idx = i; // 记录身高最高的人的下标
+        for (int j = i + 1; j < n; j++) &#123; // 从 i+1 的位置开始循环
+            if (heights[idx[max_idx]] < heights[idx[j]]) &#123; // 如果出现更高的人
+                max_idx = j; // 更新最高的人的下标为 j
+            &#125;
+        &#125;
+        swap(idx[i], idx[max_idx]); // 将当前位置 i 和最高的人的位置 max_idx 进行交换
+    &#125;
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-10-28T22:58:01+08:00"
-              content="2022-10-28">
-          10-28
-        </time>
-      </div>
+    // 按顺序将 names 中的名字加入结果数组
+    vector<string> res(n); // 建立长度为 n 的结果数组
+    for (int i = 0; i < n; i++) &#123; // 循环 n 次
+        res[i] = names[idx[i]]; // 将原始 names 中对应下标的名字存入结果数组
+    &#125;
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/10/28/10-02%E6%97%A5%E7%BB%83/" itemprop="url">
-            <span itemprop="name">10.02日练</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-10-08T22:20:23+08:00"
-              content="2022-10-08">
-          10-08
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/10/08/Start-here/" itemprop="url">
-            <span itemprop="name">Start_here</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
+    return res; // 返回排序后的名字数组
+&#125;
+</code></pre>
 
     </div>
-  </div>
-  
-  
-  
 
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/leetcode/" rel="tag"># leetcode</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/04/24/4-24%E6%AF%8F%E6%97%A5/" rel="prev" title="4-24每日">
+      <i class="fa fa-chevron-left"></i> 4-24每日
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
 
@@ -265,6 +318,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2418-%E6%8C%89%E8%BA%AB%E9%AB%98%E6%8E%92%E5%BA%8F"><span class="nav-number">1.</span> <span class="nav-text">2418. 按身高排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3"><span class="nav-number">1.1.</span> <span class="nav-text">题解</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
