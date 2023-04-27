@@ -155,6 +155,102 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/27/4-27%E6%AF%8F%E6%97%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Chris Temper">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi! Have a good day!">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/27/4-27%E6%AF%8F%E6%97%A5/" class="post-title-link" itemprop="url">4-27每日</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-04-27 13:02:50 / 修改时间：13:36:44" itemprop="dateCreated datePublished" datetime="2023-04-27T13:02:50+08:00">2023-04-27</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1048-最长字符串链"><a href="#1048-最长字符串链" class="headerlink" title="1048. 最长字符串链"></a>1048. 最长字符串链</h1><p>给出一个单词数组 <code>words</code> ，其中每个单词都由小写英文字母组成。</p>
+<p>如果我们可以 <strong>不改变其他字符的顺序</strong> ，在 <code>wordA</code> 的任何地方添加 <strong>恰好一个</strong> 字母使其变成 <code>wordB</code> ，那么我们认为 <code>wordA</code> 是 <code>wordB</code> 的 <strong>前身</strong> 。</p>
+<ul>
+<li>例如，<code>&quot;abc&quot;</code> 是 <code>&quot;abac&quot;</code> 的 <strong>前身</strong> ，而 <code>&quot;cba&quot;</code> 不是 <code>&quot;bcad&quot;</code> 的 <strong>前身</strong></li>
+</ul>
+<p><strong>词链</strong>是单词 <code>[word_1, word_2, ..., word_k]</code> 组成的序列，<code>k &gt;= 1</code>，其中 <code>word1</code> 是 <code>word2</code> 的前身，<code>word2</code> 是 <code>word3</code> 的前身，依此类推。一个单词通常是 <code>k == 1</code> 的 <strong>单词链</strong> 。</p>
+<p>从给定单词列表 <code>words</code> 中选择单词组成词链，返回 词链的 <strong>最长可能长度</strong> 。</p>
+<p><strong>示例 1：</strong></p>
+<pre><code>输入：words = [&quot;a&quot;,&quot;b&quot;,&quot;ba&quot;,&quot;bca&quot;,&quot;bda&quot;,&quot;bdca&quot;]
+输出：4
+解释：最长单词链之一为 [&quot;a&quot;,&quot;ba&quot;,&quot;bda&quot;,&quot;bdca&quot;]
+</code></pre>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>排序 + 哈希表</p>
+<p>根据题目描述，字符串链中的单词必须按照长度递增的顺序排列。因此，我们首先对数组 words 中的字符串按照长度进行升序排序。在排好序的数组中，如果字符串 a 是字符串 b 的前身，那么字符串 a 的长度一定是字符串 b 的长度减去 1。</p>
+<p>我们可以使用哈希表 d 存储排好序的数组中的每个字符串的最长字符串链长度。</p>
+<p>接下来，遍历数组 words 中的每个字符串 s，计算出它的所有前身字符串 t，每一个前身字符串 t 是将字符串 s 中的一个字符删除后得到的。如果哈希表中存在字符串 t，那么我们就能够用 d[t]+1 更新 d[s]，即 d[s]&#x3D;max⁡(d[s],d[t]+1)。然后我们更新答案为所有 d[s] 中的最大值。</p>
+<p>遍历结束后，返回答案即可。</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><pre class=" language-C++"><code class="language-C++">class Solution &#123;
+public:
+    int longestStrChain(vector<string>& words) &#123;
+        // 将单词按照长度递增排序
+        sort(words.begin(), words.end(), [](auto &a, auto &b) &#123; return a.size() < b.size(); &#125;);
+        int ans = 0;
+        unordered_map<string, int> d; // 哈希表 d 存储以某个单词为链尾的最长链长度
+        for (auto &s : words) &#123;
+            int x = 1; // 将自己看作一个长度为 1 的链
+            for (int i = 0; i < s.size(); ++i) &#123;
+                // 枚举 s 中每个位置，假设删掉该位置上的字符后的字符串为 t
+                string t = s.substr(0, i) + s.substr(i + 1);
+                x = max(x, d[t] + 1); // 更新以 s 为链尾的最长链长度
+            &#125;
+            d[s] = x; // 更新哈希表
+            ans = max(ans, x);
+        &#125;
+        return ans; // 返回最长链长度
+    &#125;
+&#125;;
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/26/4-26%E6%AF%8F%E6%97%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1512,106 +1608,6 @@ int main() &#123;
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/17/4-17%E6%AF%8F%E6%97%A5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Chris Temper">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi! Have a good day!">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/04/17/4-17%E6%AF%8F%E6%97%A5/" class="post-title-link" itemprop="url">4-17每日</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-04-17 17:54:52 / 修改时间：17:57:04" itemprop="dateCreated datePublished" datetime="2023-04-17T17:54:52+08:00">2023-04-17</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="2409-统计共同度过的日子数"><a href="#2409-统计共同度过的日子数" class="headerlink" title="2409. 统计共同度过的日子数"></a>2409. 统计共同度过的日子数</h1><p>Alice 和 Bob 计划分别去罗马开会。</p>
-<p>给你四个字符串 <code>arriveAlice</code> ，<code>leaveAlice</code> ，<code>arriveBob</code> 和 <code>leaveBob</code> 。Alice 会在日期 <code>arriveAlice</code> 到 <code>leaveAlice</code> 之间在城市里（<strong>日期为闭区间</strong>），而 Bob 在日期 <code>arriveBob</code> 到 <code>leaveBob</code> 之间在城市里（<strong>日期为闭区间</strong>）。每个字符串都包含 5 个字符，格式为 <code>&quot;MM-DD&quot;</code> ，对应着一个日期的月和日。</p>
-<p>请你返回 Alice和 Bob 同时在罗马的天数。</p>
-<p>你可以假设所有日期都在 <strong>同一个</strong> 自然年，而且 <strong>不是</strong> 闰年。每个月份的天数分别为：<code>[31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]</code> 。</p>
-<p><strong>示例 1：</strong></p>
-<pre><code>输入：arriveAlice = &quot;08-15&quot;, leaveAlice = &quot;08-18&quot;, arriveBob = &quot;08-16&quot;, leaveBob = &quot;08-19&quot;
-输出：3
-解释：Alice 从 8 月 15 号到 8 月 18 号在罗马。Bob 从 8 月 16 号到 8 月 19 号在罗马，他们同时在罗马的日期为 8 月 16、17 和 18 号。所以答案为 3 。
-</code></pre>
-<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>主要还是输入处理的问题，将日期字符串分割，然后处理为日期数。</p>
-<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">/**
- * @param &amp;#123;string&amp;#125; arriveAlice
- * @param &amp;#123;string&amp;#125; leaveAlice
- * @param &amp;#123;string&amp;#125; arriveBob
- * @param &amp;#123;string&amp;#125; leaveBob
- * @return &amp;#123;number&amp;#125;
- */</span>
-<span class="token keyword">const</span> monthDays <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">31</span><span class="token punctuation">,</span> <span class="token number">28</span><span class="token punctuation">,</span> <span class="token number">31</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">31</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">31</span><span class="token punctuation">,</span> <span class="token number">31</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">31</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">31</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-
-<span class="token keyword">var</span> countDaysTogether <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>arriveAlice<span class="token punctuation">,</span> leaveAlice<span class="token punctuation">,</span> arriveBob<span class="token punctuation">,</span> leaveBob<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">// 用数组 `sum` 存储每个月的天数累加和</span>
-    <span class="token keyword">let</span> sum <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> monthDays<span class="token punctuation">.</span>length<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        sum<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>sum<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">+</span> monthDays<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">// 分别计算两个人到达日期和离开日期的天数</span>
-    <span class="token keyword">let</span> aA <span class="token operator">=</span> <span class="token function">calc</span><span class="token punctuation">(</span>arriveAlice<span class="token punctuation">,</span> sum<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> lA <span class="token operator">=</span> <span class="token function">calc</span><span class="token punctuation">(</span>leaveAlice<span class="token punctuation">,</span> sum<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> aB <span class="token operator">=</span> <span class="token function">calc</span><span class="token punctuation">(</span>arriveBob<span class="token punctuation">,</span> sum<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> lB <span class="token operator">=</span> <span class="token function">calc</span><span class="token punctuation">(</span>leaveBob<span class="token punctuation">,</span> sum<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token comment" spellcheck="true">// 根据到达和离开日期的天数计算旅行天数，即两个时间段的重合部分</span>
-    <span class="token keyword">return</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> Math<span class="token punctuation">.</span><span class="token function">min</span><span class="token punctuation">(</span>lA<span class="token punctuation">,</span> lB<span class="token punctuation">)</span> <span class="token operator">-</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>aA<span class="token punctuation">,</span> aB<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
-
-<span class="token comment" spellcheck="true">// 计算日期所对应的天数</span>
-<span class="token keyword">function</span> <span class="token function">calc</span><span class="token punctuation">(</span>day<span class="token punctuation">,</span> sum<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> month <span class="token operator">=</span> <span class="token function">parseInt</span><span class="token punctuation">(</span>day<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> date <span class="token operator">=</span> <span class="token function">parseInt</span><span class="token punctuation">(</span>day<span class="token punctuation">.</span><span class="token function">substring</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> sum<span class="token punctuation">[</span>month <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> date<span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-</code></pre>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1681,7 +1677,7 @@ int main() &#123;
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

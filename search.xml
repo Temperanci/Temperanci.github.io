@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>4-27每日</title>
+      <link href="/2023/04/27/4-27%E6%AF%8F%E6%97%A5/"/>
+      <url>/2023/04/27/4-27%E6%AF%8F%E6%97%A5/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1048-最长字符串链"><a href="#1048-最长字符串链" class="headerlink" title="1048. 最长字符串链"></a>1048. 最长字符串链</h1><p>给出一个单词数组 <code>words</code> ，其中每个单词都由小写英文字母组成。</p><p>如果我们可以 <strong>不改变其他字符的顺序</strong> ，在 <code>wordA</code> 的任何地方添加 <strong>恰好一个</strong> 字母使其变成 <code>wordB</code> ，那么我们认为 <code>wordA</code> 是 <code>wordB</code> 的 <strong>前身</strong> 。</p><ul><li>例如，<code>&quot;abc&quot;</code> 是 <code>&quot;abac&quot;</code> 的 <strong>前身</strong> ，而 <code>&quot;cba&quot;</code> 不是 <code>&quot;bcad&quot;</code> 的 <strong>前身</strong></li></ul><p><strong>词链</strong>是单词 <code>[word_1, word_2, ..., word_k]</code> 组成的序列，<code>k &gt;= 1</code>，其中 <code>word1</code> 是 <code>word2</code> 的前身，<code>word2</code> 是 <code>word3</code> 的前身，依此类推。一个单词通常是 <code>k == 1</code> 的 <strong>单词链</strong> 。</p><p>从给定单词列表 <code>words</code> 中选择单词组成词链，返回 词链的 <strong>最长可能长度</strong> 。</p><p><strong>示例 1：</strong></p><pre><code>输入：words = [&quot;a&quot;,&quot;b&quot;,&quot;ba&quot;,&quot;bca&quot;,&quot;bda&quot;,&quot;bdca&quot;]输出：4解释：最长单词链之一为 [&quot;a&quot;,&quot;ba&quot;,&quot;bda&quot;,&quot;bdca&quot;]</code></pre><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>排序 + 哈希表</p><p>根据题目描述，字符串链中的单词必须按照长度递增的顺序排列。因此，我们首先对数组 words 中的字符串按照长度进行升序排序。在排好序的数组中，如果字符串 a 是字符串 b 的前身，那么字符串 a 的长度一定是字符串 b 的长度减去 1。</p><p>我们可以使用哈希表 d 存储排好序的数组中的每个字符串的最长字符串链长度。</p><p>接下来，遍历数组 words 中的每个字符串 s，计算出它的所有前身字符串 t，每一个前身字符串 t 是将字符串 s 中的一个字符删除后得到的。如果哈希表中存在字符串 t，那么我们就能够用 d[t]+1 更新 d[s]，即 d[s]&#x3D;max⁡(d[s],d[t]+1)。然后我们更新答案为所有 d[s] 中的最大值。</p><p>遍历结束后，返回答案即可。</p><h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><pre class=" language-C++"><code class="language-C++">class Solution &#123;public:    int longestStrChain(vector<string>& words) &#123;        // 将单词按照长度递增排序        sort(words.begin(), words.end(), [](auto &a, auto &b) &#123; return a.size() < b.size(); &#125;);        int ans = 0;        unordered_map<string, int> d; // 哈希表 d 存储以某个单词为链尾的最长链长度        for (auto &s : words) &#123;            int x = 1; // 将自己看作一个长度为 1 的链            for (int i = 0; i < s.size(); ++i) &#123;                // 枚举 s 中每个位置，假设删掉该位置上的字符后的字符串为 t                string t = s.substr(0, i) + s.substr(i + 1);                x = max(x, d[t] + 1); // 更新以 s 为链尾的最长链长度            &#125;            d[s] = x; // 更新哈希表            ans = max(ans, x);        &#125;        return ans; // 返回最长链长度    &#125;&#125;;</code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> leetcode </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>4-26每日</title>
       <link href="/2023/04/26/4-26%E6%AF%8F%E6%97%A5/"/>
       <url>/2023/04/26/4-26%E6%AF%8F%E6%97%A5/</url>
