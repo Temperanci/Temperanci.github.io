@@ -155,6 +155,208 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/28/4-28%E6%AF%8F%E6%97%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Chris Temper">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi! Have a good day!">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/28/4-28%E6%AF%8F%E6%97%A5/" class="post-title-link" itemprop="url">4-28每日</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-04-28 23:10:47 / 修改时间：23:15:50" itemprop="dateCreated datePublished" datetime="2023-04-28T23:10:47+08:00">2023-04-28</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1172-餐盘栈"><a href="#1172-餐盘栈" class="headerlink" title="1172. 餐盘栈"></a>1172. 餐盘栈</h1><p>&#x3D;&#x3D;Hard&#x3D;&#x3D;</p>
+<p>我们把无限数量 ∞ 的栈排成一行，按从左到右的次序从 0 开始编号。每个栈的的最大容量 <code>capacity</code> 都相同。</p>
+<p>实现一个叫「餐盘」的类 <code>DinnerPlates</code>：</p>
+<ul>
+<li><code>DinnerPlates(int capacity)</code> - 给出栈的最大容量 <code>capacity</code>。</li>
+<li><code>void push(int val)</code> - 将给出的正整数 <code>val</code> 推入 <strong>从左往右第一个</strong> 没有满的栈。</li>
+<li><code>int pop()</code> - 返回 <strong>从右往左第一个</strong> 非空栈顶部的值，并将其从栈中删除；如果所有的栈都是空的，请返回 <code>-1</code>。</li>
+<li><code>int popAtStack(int index)</code> - 返回编号 <code>index</code> 的栈顶部的值，并将其从栈中删除；如果编号 <code>index</code> 的栈是空的，请返回 <code>-1</code>。</li>
+</ul>
+<p><strong>示例：</strong></p>
+<pre><code>输入： 
+[&quot;DinnerPlates&quot;,&quot;push&quot;,&quot;push&quot;,&quot;push&quot;,&quot;push&quot;,&quot;push&quot;,&quot;popAtStack&quot;,&quot;push&quot;,&quot;push&quot;,&quot;popAtStack&quot;,&quot;popAtStack&quot;,&quot;pop&quot;,&quot;pop&quot;,&quot;pop&quot;,&quot;pop&quot;,&quot;pop&quot;]
+[[2],[1],[2],[3],[4],[5],[0],[20],[21],[0],[2],[],[],[],[],[]]
+输出：
+[null,null,null,null,null,null,2,null,null,20,21,5,4,3,1,-1]
+
+解释：
+DinnerPlates D = DinnerPlates(2);  // 初始化，栈最大容量 capacity = 2
+D.push(1);
+D.push(2);
+D.push(3);
+D.push(4);
+D.push(5);         // 栈的现状为：    2  4
+                                    1  3  5
+                                    ﹈ ﹈ ﹈
+D.popAtStack(0);   // 返回 2。栈的现状为：      4
+                                          1  3  5
+                                          ﹈ ﹈ ﹈
+D.push(20);        // 栈的现状为：  20  4
+                                   1  3  5
+                                   ﹈ ﹈ ﹈
+D.push(21);        // 栈的现状为：  20  4 21
+                                   1  3  5
+                                   ﹈ ﹈ ﹈
+D.popAtStack(0);   // 返回 20。栈的现状为：       4 21
+                                            1  3  5
+                                            ﹈ ﹈ ﹈
+D.popAtStack(2);   // 返回 21。栈的现状为：       4
+                                            1  3  5
+                                            ﹈ ﹈ ﹈ 
+D.pop()            // 返回 5。栈的现状为：        4
+                                            1  3 
+                                            ﹈ ﹈  
+D.pop()            // 返回 4。栈的现状为：    1  3 
+                                           ﹈ ﹈   
+D.pop()            // 返回 3。栈的现状为：    1 
+                                           ﹈   
+D.pop()            // 返回 1。现在没有栈。
+D.pop()            // 返回 -1。仍然没有栈。
+</code></pre>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>摘自<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/dinner-plate-stacks/solutions/2248935/python3javacgotypescript-yi-ti-yi-jie-zh-00fe/">https://leetcode.cn/problems/dinner-plate-stacks/solutions/2248935/python3javacgotypescript-yi-ti-yi-jie-zh-00fe/</a></p>
+<p>方法一：栈数组 + 有序集合</p>
+<p>我们定义以下数据结构或变量：</p>
+<ul>
+<li><code>capacity</code>：每个栈的容量；</li>
+<li><code>stacks</code>：栈数组，用于存储所有的栈，其中每个栈的最大容量都是 <code>capacity</code>；</li>
+<li><code>not_full</code>：有序集合，用于存储所有未满的栈在栈数组中的下标。</li>
+</ul>
+<p>对于 <code>push(val)</code> 操作：</p>
+<ul>
+<li>我们首先判断 <code>not_full</code> 是否为空，如果为空，则说明没有未满的栈，需要新建一个栈，然后将 <code>val</code> 压入该栈中，此时判断容量 <code>capacity</code> 是否大于 1，如果大于 1，则将该栈的下标加入 <code>not_full</code> 中。</li>
+<li>如果 <code>not_full</code> 不为空，则说明有未满的栈，我们取出 <code>not_full</code> 中最小的下标 <code>index</code>，将 <code>val</code> 压入 <code>stacks[index]</code> 中，此时如果 <code>stacks[index]</code> 的容量等于 <code>capacity</code>，则将 <code>index</code> 从 <code>not_full</code> 中删除。</li>
+</ul>
+<p>对于 <code>popAtStack(index)</code> 操作：</p>
+<ul>
+<li>我们首先判断 <code>index</code> 是否在 <code>stacks</code> 的下标范围内，如果不在，则直接返回 −1。如果 <code>stacks[index]</code> 为空，同样直接返回 −1。</li>
+<li>如果 <code>stacks[index]</code> 不为空，则弹出 <code>stacks[index]</code> 的栈顶元素 <code>val</code>。如果 <code>index</code> 等于 <code>stacks</code> 的长度减 1，则说明 <code>stacks[index]</code> 是最后一个栈，如果为空，我们循环将最后一个栈的下标从 <code>not_full</code> 中移出，并且在栈数组 <code>stacks</code> 中移除最后一个栈，直到最后一个栈不为空、或者栈数组 <code>stacks</code> 为空为止。否则，如果 <code>stacks[index]</code> 不是最后一个栈，我们将 <code>index</code> 加入 <code>not_full</code> 中。</li>
+<li>最后返回 <code>val</code>。</li>
+</ul>
+<p>对于 <code>pop()</code> 操作：</p>
+<ul>
+<li>我们直接调用 <code>popAtStack(stacks.length - 1)</code> 即可。</li>
+</ul>
+<pre class=" language-C++"><code class="language-C++">class DinnerPlates &#123;
+public:
+    DinnerPlates(int capacity) &#123;
+        this->capacity = capacity;
+    &#125;
+
+    // 插入元素，push 方法会将元素插入到最早有空闲栈的末尾或者新建一个栈
+    void push(int val) &#123;
+        // 如果不存在有空闲栈，就新建一个栈，并把元素压入
+        if (notFull.empty()) &#123;
+            stacks.emplace_back(stack<int>());
+            stacks.back().push(val);
+            // 如果栈的容量大于 1，那么表示该栈还有余地，需要将其纳入有空闲栈的集合
+            if (capacity > 1) &#123;
+                notFull.insert(stacks.size() - 1);
+            &#125;
+        &#125; else &#123;
+            // 否则，找到有空闲栈中的最小索引，将元素压入到该栈的末尾
+            // 注意，这里的索引是集合中最小的索引，而不是数组下标
+            int index = *notFull.begin();
+            stacks[index].push(val);
+            if (stacks[index].size() == capacity) &#123;
+                // 如果当前栈已经达到容量上限，就将其从集合中移除
+                notFull.erase(index);
+            &#125;
+        &#125;
+    &#125;
+
+    // 弹出最后一个栈的栈顶元素，如果没有任何元素就返回 -1
+    int pop() &#123;
+        return popAtStack(stacks.size() - 1);
+    &#125;
+
+    // 弹出指定栈的栈顶元素，如果栈为空或者索引越界就返回 -1
+    int popAtStack(int index) &#123;
+        if (index < 0 || index >= stacks.size() || stacks[index].empty()) &#123;
+            // 如果索引越界或者栈为空，就返回 -1
+            return -1;
+        &#125;
+        // 否则，弹出该栈的栈顶元素，并检查该栈是否已经空了
+        int val = stacks[index].top();
+        stacks[index].pop();
+        if (index == stacks.size() - 1 && stacks[index].empty()) &#123;
+            // 如果当前弹出的是最后一个栈的元素，并且该栈已经空了，
+            // 就需要将数组末尾也为空的栈移除掉，同时更新有空闲栈的集合
+            while (!stacks.empty() && stacks.back().empty()) &#123;
+                notFull.erase(stacks.size() - 1);
+                stacks.pop_back();
+            &#125;
+        &#125; else &#123;
+            // 如果弹出的是中间的某个栈的元素，就将其索引加入到有空闲栈的集合之中
+            notFull.insert(index);
+        &#125;
+        return val;
+    &#125;
+
+private:
+    int capacity; // 定义栈的容量
+    vector<stack<int>> stacks; // 维护多个栈
+    set<int> notFull; // 存储有空闲栈的索引
+&#125;;
+
+
+/**
+ * Your DinnerPlates object will be instantiated and called as such:
+ * DinnerPlates* obj = new DinnerPlates(capacity);
+ * obj->push(val);
+ * int param_2 = obj->pop();
+ * int param_3 = obj->popAtStack(index);
+ */
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/27/4-27%E6%AF%8F%E6%97%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1490,124 +1692,6 @@ int main() &#123;
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/18/4-18%E6%AF%8F%E6%97%A5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Chris Temper">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi! Have a good day!">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/04/18/4-18%E6%AF%8F%E6%97%A5/" class="post-title-link" itemprop="url">4-18每日</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-04-18 22:12:24 / 修改时间：22:13:26" itemprop="dateCreated datePublished" datetime="2023-04-18T22:12:24+08:00">2023-04-18</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="1026-节点与其祖先之间的最大差值"><a href="#1026-节点与其祖先之间的最大差值" class="headerlink" title="1026. 节点与其祖先之间的最大差值"></a>1026. 节点与其祖先之间的最大差值</h1><p>给定二叉树的根节点 <code>root</code>，找出存在于 <strong>不同</strong> 节点 <code>A</code> 和 <code>B</code> 之间的最大值 <code>V</code>，其中 <code>V = |A.val - B.val|</code>，且 <code>A</code> 是 <code>B</code> 的祖先。</p>
-<p>（如果 A 的任何子节点之一为 B，或者 A 的任何子节点是 B 的祖先，那么我们认为 A 是 B 的祖先）</p>
-<p><strong>示例 1：</strong></p>
-<p><img src="https://assets.leetcode.com/uploads/2020/11/09/tmp-tree.jpg" alt="img"></p>
-<pre><code>输入：root = [8,3,10,1,6,null,14,null,null,4,7,13]
-输出：7
-解释： 
-我们有大量的节点与其祖先的差值，其中一些如下：
-|8 - 3| = 5
-|3 - 7| = 4
-|8 - 1| = 7
-|10 - 13| = 3
-在所有可能的差值中，最大值 7 由 |8 - 1| = 7 得出。
-</code></pre>
-<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> maxAncestorDiff <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> result <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> 
-        V<span class="token punctuation">:</span> <span class="token number">0</span> 
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 记录最大差值</span>
-    <span class="token function">dfs</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span> result<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> result<span class="token punctuation">.</span>V<span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
-
-<span class="token keyword">function</span> <span class="token function">dfs</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span> result<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>root<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> max<span class="token punctuation">:</span> <span class="token operator">-</span><span class="token number">Infinity</span><span class="token punctuation">,</span> min<span class="token punctuation">:</span> <span class="token number">Infinity</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    
-    <span class="token keyword">let</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> max<span class="token punctuation">:</span> maxLeft<span class="token punctuation">,</span> min<span class="token punctuation">:</span> minLeft <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token operator">=</span> <span class="token function">dfs</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>left<span class="token punctuation">,</span> result<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 左子节点的最大值和最小值</span>
-    <span class="token keyword">let</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> max<span class="token punctuation">:</span> maxRight<span class="token punctuation">,</span> min<span class="token punctuation">:</span> minRight <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token operator">=</span> <span class="token function">dfs</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>right<span class="token punctuation">,</span> result<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 右子节点的最大值和最小值</span>
-    
-    <span class="token comment" spellcheck="true">// 计算当前节点子树中的最大值和最小值</span>
-    <span class="token keyword">let</span> maxVal <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>val<span class="token punctuation">,</span> maxLeft<span class="token punctuation">,</span> maxRight<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> minVal <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">min</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>val<span class="token punctuation">,</span> minLeft<span class="token punctuation">,</span> minRight<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    
-    <span class="token comment" spellcheck="true">// 更新最大值</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>root<span class="token punctuation">.</span>left<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        <span class="token keyword">let</span> diff <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">abs</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>val <span class="token operator">-</span> minLeft<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>diff <span class="token operator">></span> result<span class="token punctuation">.</span>V<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-            result<span class="token punctuation">.</span>V <span class="token operator">=</span> diff<span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-        diff <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">abs</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>val <span class="token operator">-</span> maxLeft<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>diff <span class="token operator">></span> result<span class="token punctuation">.</span>V<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-            result<span class="token punctuation">.</span>V <span class="token operator">=</span> diff<span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>root<span class="token punctuation">.</span>right<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        <span class="token keyword">let</span> diff <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">abs</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>val <span class="token operator">-</span> minRight<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>diff <span class="token operator">></span> result<span class="token punctuation">.</span>V<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-            result<span class="token punctuation">.</span>V <span class="token operator">=</span> diff<span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-        diff <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">abs</span><span class="token punctuation">(</span>root<span class="token punctuation">.</span>val <span class="token operator">-</span> maxRight<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>diff <span class="token operator">></span> result<span class="token punctuation">.</span>V<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-            result<span class="token punctuation">.</span>V <span class="token operator">=</span> diff<span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    
-    <span class="token keyword">return</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> max<span class="token punctuation">:</span> maxVal<span class="token punctuation">,</span> min<span class="token punctuation">:</span> minVal <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-</code></pre>
-<p>如果直接使用 <code>result = 0</code> 来初始化结果，则会导致 <code>result</code> 存储的是一个数字，而不是一个对象。这样在 DFS 遍历过程中，我们无法直接修改 <code>result</code> 的值，而需要额外声明一个变量来保存最大差值。具体来说，我们需要在递归函数的返回值中返回最大差值，然后在计算当前节点的最大差值时，将递归返回的最大差值和当前节点的差值进行比较，取两者中的较大值作为新的最大差值。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1677,7 +1761,7 @@ int main() &#123;
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
