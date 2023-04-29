@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>4-29每日</title>
+      <link href="/2023/04/29/4-29%E6%AF%8F%E6%97%A5/"/>
+      <url>/2023/04/29/4-29%E6%AF%8F%E6%97%A5/</url>
+      
+        <content type="html"><![CDATA[<h1 id="2423-删除字符使频率相同"><a href="#2423-删除字符使频率相同" class="headerlink" title="2423. 删除字符使频率相同"></a>2423. 删除字符使频率相同</h1><p>&#x3D;&#x3D;Easy&#x3D;&#x3D;</p><p>给你一个下标从 <strong>0</strong> 开始的字符串 <code>word</code> ，字符串只包含小写英文字母。你需要选择 <strong>一个</strong> 下标并 <strong>删除</strong> 下标处的字符，使得 <code>word</code> 中剩余每个字母出现 <strong>频率</strong> 相同。</p><p>如果删除一个字母后，<code>word</code> 中剩余所有字母的出现频率都相同，那么返回 <code>true</code> ，否则返回 <code>false</code> 。</p><p><strong>注意：</strong></p><ul><li>字母 <code>x</code> 的 <strong>频率</strong> 是这个字母在字符串中出现的次数。</li><li>你 <strong>必须</strong> 恰好删除一个字母，不能一个字母都不删除。</li></ul><p><strong>示例 1：</strong></p><pre><code>输入：word = &quot;abcc&quot;输出：true解释：选择下标 3 并删除该字母，word 变成 &quot;abc&quot; 且每个字母出现频率都为 1 。</code></pre><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>我们先用哈希表或者一个长度为 26 的数组 freq 统计字符串中每个字母出现的次数。</p><p>接下来，枚举 26 个字母，如果字母 s 在字符串中出现过，我们将其出现次数减一，然后判断剩余的字母出现次数是否相同。如果相同，返回 true，否则将 s 的出现次数加一，继续枚举下一个字母。</p><p>枚举结束，说明无法通过删除一个字母使得剩余字母出现次数相同，返回 false。</p><pre class=" language-C++"><code class="language-C++">class Solution &#123;public:    // 类成员变量 freq 数组，用于存储字符的出现次数    int freq[26];        bool equalFrequency(string word) &#123;        // 第一次遍历字符串，统计字符出现的次数        for (char s : word) &#123;            ++freq[s - 'a'];        &#125;        // 第二次遍历 freq 数组，依次将每个字符的出现次数减 1，判断剩余字符的频数是否相同        for (int i = 0; i < 26; ++i) &#123;            if (freq[i] != 0) &#123;                freq[i]--; // 将当前字符的出现次数减 1                bool flag = true; // 标记剩余字符是否频数相同的标志                int x = 0; // 中间变量，用于存储某个字符的频数                for(int j = 0; j < 26; ++j) &#123;                    if (freq[j] == 0) &#123; // 如果这个字符的出现次数已经是 0，那么跳过它                        continue;                    &#125;                    else if (x == 0 && freq[j] != 0) &#123; // 如果 x 是 0，并且这个字符的出现次数不是 0，那么将 x 赋值为这个字符的出现次数                        x = freq[j];                    &#125;                    else &#123; // 如果 x 不是 0，并且这个字符的出现次数也不是 0                        if (x == freq[j]) &#123; // 如果 x 等于这个字符的出现次数，那么说明剩余字符的频数仍然相同                            continue;                        &#125;                        else &#123; // 否则说明剩余字符的频数不相同                            flag = false;                        &#125;                    &#125;                &#125;                if (flag) &#123; // 如果剩余字符的频数相同，那么说明存在一种方法，使得剩余字符的每个字符出现次数相等                    return true;                &#125;                else &#123; // 否则说明剩余字符的频数不相同，恢复 freq 数组，并检查下一个字符                    freq[i]++;                    continue;                &#125;            &#125;        &#125;        return false; // 如果遍历完 freq 数组都没有找到符合要求的字符，那么返回 false    &#125;&#125;;</code></pre>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> leetcode </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>4-28每日</title>
       <link href="/2023/04/28/4-28%E6%AF%8F%E6%97%A5/"/>
       <url>/2023/04/28/4-28%E6%AF%8F%E6%97%A5/</url>

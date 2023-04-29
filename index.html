@@ -155,6 +155,125 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/29/4-29%E6%AF%8F%E6%97%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Chris Temper">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi! Have a good day!">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/29/4-29%E6%AF%8F%E6%97%A5/" class="post-title-link" itemprop="url">4-29每日</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-04-29 17:57:52 / 修改时间：18:07:29" itemprop="dateCreated datePublished" datetime="2023-04-29T17:57:52+08:00">2023-04-29</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="2423-删除字符使频率相同"><a href="#2423-删除字符使频率相同" class="headerlink" title="2423. 删除字符使频率相同"></a>2423. 删除字符使频率相同</h1><p>&#x3D;&#x3D;Easy&#x3D;&#x3D;</p>
+<p>给你一个下标从 <strong>0</strong> 开始的字符串 <code>word</code> ，字符串只包含小写英文字母。你需要选择 <strong>一个</strong> 下标并 <strong>删除</strong> 下标处的字符，使得 <code>word</code> 中剩余每个字母出现 <strong>频率</strong> 相同。</p>
+<p>如果删除一个字母后，<code>word</code> 中剩余所有字母的出现频率都相同，那么返回 <code>true</code> ，否则返回 <code>false</code> 。</p>
+<p><strong>注意：</strong></p>
+<ul>
+<li>字母 <code>x</code> 的 <strong>频率</strong> 是这个字母在字符串中出现的次数。</li>
+<li>你 <strong>必须</strong> 恰好删除一个字母，不能一个字母都不删除。</li>
+</ul>
+<p><strong>示例 1：</strong></p>
+<pre><code>输入：word = &quot;abcc&quot;
+输出：true
+解释：选择下标 3 并删除该字母，word 变成 &quot;abc&quot; 且每个字母出现频率都为 1 。
+</code></pre>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>我们先用哈希表或者一个长度为 26 的数组 freq 统计字符串中每个字母出现的次数。</p>
+<p>接下来，枚举 26 个字母，如果字母 s 在字符串中出现过，我们将其出现次数减一，然后判断剩余的字母出现次数是否相同。如果相同，返回 true，否则将 s 的出现次数加一，继续枚举下一个字母。</p>
+<p>枚举结束，说明无法通过删除一个字母使得剩余字母出现次数相同，返回 false。</p>
+<pre class=" language-C++"><code class="language-C++">class Solution &#123;
+public:
+    // 类成员变量 freq 数组，用于存储字符的出现次数
+    int freq[26];
+    
+    bool equalFrequency(string word) &#123;
+        // 第一次遍历字符串，统计字符出现的次数
+        for (char s : word) &#123;
+            ++freq[s - 'a'];
+        &#125;
+        // 第二次遍历 freq 数组，依次将每个字符的出现次数减 1，判断剩余字符的频数是否相同
+        for (int i = 0; i < 26; ++i) &#123;
+            if (freq[i] != 0) &#123;
+                freq[i]--; // 将当前字符的出现次数减 1
+                bool flag = true; // 标记剩余字符是否频数相同的标志
+                int x = 0; // 中间变量，用于存储某个字符的频数
+                for(int j = 0; j < 26; ++j) &#123;
+                    if (freq[j] == 0) &#123; // 如果这个字符的出现次数已经是 0，那么跳过它
+                        continue;
+                    &#125;
+                    else if (x == 0 && freq[j] != 0) &#123; // 如果 x 是 0，并且这个字符的出现次数不是 0，那么将 x 赋值为这个字符的出现次数
+                        x = freq[j];
+                    &#125;
+                    else &#123; // 如果 x 不是 0，并且这个字符的出现次数也不是 0
+                        if (x == freq[j]) &#123; // 如果 x 等于这个字符的出现次数，那么说明剩余字符的频数仍然相同
+                            continue;
+                        &#125;
+                        else &#123; // 否则说明剩余字符的频数不相同
+                            flag = false;
+                        &#125;
+                    &#125;
+                &#125;
+                if (flag) &#123; // 如果剩余字符的频数相同，那么说明存在一种方法，使得剩余字符的每个字符出现次数相等
+                    return true;
+                &#125;
+                else &#123; // 否则说明剩余字符的频数不相同，恢复 freq 数组，并检查下一个字符
+                    freq[i]++;
+                    continue;
+                &#125;
+            &#125;
+        &#125;
+        return false; // 如果遍历完 freq 数组都没有找到符合要求的字符，那么返回 false
+    &#125;
+&#125;;
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/28/4-28%E6%AF%8F%E6%97%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1605,93 +1724,6 @@ int main() &#123;
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/19/4-19%E6%AF%8F%E6%97%A5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Chris Temper">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi! Have a good day!">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/04/19/4-19%E6%AF%8F%E6%97%A5/" class="post-title-link" itemprop="url">4-19每日</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-04-19 13:57:42 / 修改时间：13:59:43" itemprop="dateCreated datePublished" datetime="2023-04-19T13:57:42+08:00">2023-04-19</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="1043-分隔数组以得到最大和"><a href="#1043-分隔数组以得到最大和" class="headerlink" title="1043. 分隔数组以得到最大和"></a>1043. 分隔数组以得到最大和</h1><p>给你一个整数数组 <code>arr</code>，请你将该数组分隔为长度 <strong>最多</strong> 为 k 的一些（连续）子数组。分隔完成后，每个子数组的中的所有值都会变为该子数组中的最大值。</p>
-<p>返回将数组分隔变换后能够得到的元素最大和。本题所用到的测试用例会确保答案是一个 32 位整数。</p>
-<p><strong>示例 1：</strong></p>
-<pre><code>输入：arr = [1,15,7,9,2,5,10], k = 3
-输出：84
-解释：数组变为 [15,15,15,9,10,10,10]
-</code></pre>
-<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>先通过动态规划预处理出位置 <code>i</code> 前的一个子区间的最大值，即 <code>max</code>，再利用动态规划求出位置 <code>i</code> 的最优解，即将位置 <code>i</code> 之前分成一个长度为 <code>j</code> 的区间和一个长度为 <code>i - j</code> 的区间，前者的最大值即为 <code>max</code>。随着不断前进，将得到整个数组的解。注意在第二层循环中，我们需要设置 j 的起点，也就是确保至少一次划分，以方便初始化 dp[1~k]，也就是最开始为 arr[0], arr[0] * 2, arr[0] * 3, …。时间复杂度为 $O(n^2)$。</p>
-<pre class=" language-js"><code class="language-js"><span class="token keyword">var</span> maxSumAfterPartitioning <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>arr<span class="token punctuation">,</span> k<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">const</span> n <span class="token operator">=</span> arr<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
-    <span class="token keyword">const</span> dp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Array</span><span class="token punctuation">(</span>n <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">fill</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// dp[i] 表示将前 i 个元素分隔变换后能够得到的元素最大和</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 遍历每个位置</span>
-        <span class="token keyword">let</span> max <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 初始化最大值</span>
-        <span class="token keyword">const</span> deque <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 定义一个单调队列</span>
-        <span class="token comment" spellcheck="true">// 从右到左遍历前 i 个元素，找出长度不超过 k 的子数组的最大值</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> j <span class="token operator">=</span> i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">>=</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> i <span class="token operator">-</span> j <span class="token operator">&lt;=</span> k<span class="token punctuation">;</span> j<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-            max <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>max<span class="token punctuation">,</span> arr<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            deque<span class="token punctuation">.</span><span class="token function">unshift</span><span class="token punctuation">(</span>max<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 将最大值加入队列头部</span>
-            <span class="token keyword">const</span> length <span class="token operator">=</span> i <span class="token operator">-</span> j<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 子数组长度为 i-j</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>length <span class="token operator">===</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 如果子数组长度为 1，直接使用该元素的值进行赋值</span>
-                dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> arr<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 否则，使用最大值乘以当前长度与 dp[j] 中的较大值进行赋值</span>
-                dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> deque<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> length <span class="token operator">+</span> dp<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> dp<span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 返回 dp[n] 即为答案</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
-</code></pre>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1761,7 +1793,7 @@ int main() &#123;
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
