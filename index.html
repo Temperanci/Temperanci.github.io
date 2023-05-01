@@ -155,6 +155,108 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/01/5-1%E6%AF%8F%E6%97%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Chris Temper">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi! Have a good day!">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/01/5-1%E6%AF%8F%E6%97%A5/" class="post-title-link" itemprop="url">5.1每日</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-05-01 15:11:12 / 修改时间：15:14:25" itemprop="dateCreated datePublished" datetime="2023-05-01T15:11:12+08:00">2023-05-01</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1376-通知所有员工所需的时间"><a href="#1376-通知所有员工所需的时间" class="headerlink" title="1376. 通知所有员工所需的时间"></a>1376. 通知所有员工所需的时间</h1><p>&#x3D;&#x3D;Medium&#x3D;&#x3D;</p>
+<p>公司里有 <code>n</code> 名员工，每个员工的 ID 都是独一无二的，编号从 <code>0</code> 到 <code>n - 1</code>。公司的总负责人通过 <code>headID</code> 进行标识。</p>
+<p>在 <code>manager</code> 数组中，每个员工都有一个直属负责人，其中 <code>manager[i]</code> 是第 <code>i</code> 名员工的直属负责人。对于总负责人，<code>manager[headID] = -1</code>。题目保证从属关系可以用树结构显示。</p>
+<p>公司总负责人想要向公司所有员工通告一条紧急消息。他将会首先通知他的直属下属们，然后由这些下属通知他们的下属，直到所有的员工都得知这条紧急消息。</p>
+<p>第 <code>i</code> 名员工需要 <code>informTime[i]</code> 分钟来通知它的所有直属下属（也就是说在 <code>informTime[i]</code> 分钟后，他的所有直属下属都可以开始传播这一消息）。</p>
+<p>返回通知所有员工这一紧急消息所需要的 <strong>分钟数</strong> 。</p>
+<p><strong>示例 1：</strong></p>
+<pre><code>输入：n = 1, headID = 0, manager = [-1], informTime = [0]
+输出：0
+解释：公司总负责人是该公司的唯一一名员工。
+</code></pre>
+<p><strong>示例 2：</strong></p>
+<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2020/03/08/graph.png" alt="img"></p>
+<pre><code>输入：n = 6, headID = 2, manager = [2,2,-1,2,2,2], informTime = [0,0,1,0,0,0]
+输出：1
+解释：id = 2 的员工是公司的总负责人，也是其他所有员工的直属负责人，他需要 1 分钟来通知所有员工。
+上图显示了公司员工的树结构。
+</code></pre>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><pre class=" language-C++"><code class="language-C++">class Solution &#123;
+public:
+    int numOfMinutes(int n, int headID, vector<int>& manager, vector<int>& informTime) &#123;
+        // 创建一个存储有向图的邻接表 g，节点个数为 n
+        vector<vector<int>> g(n);
+        // 根据 manager 数组，将每个员工连接到其直接上级员工的节点上
+        for (int i = 0; i < n; ++i) &#123;
+            if (manager[i] >= 0) &#123;
+                g[manager[i]].push_back(i);
+            &#125;
+        &#125;
+        // 创建一个 lambda 函数 dfs，用于对不同节点进行深度优先遍历，以计算从 headID 节点开始，每个员工被通知所需的最短时间
+        function<int(int)> dfs = [&](int i) -> int &#123;
+            int ans = 0; // 定义 ans 变量，表示通知 i 节点需要的时间
+            // 遍历节点 i 的所有下属节点 j
+            for (int j : g[i]) &#123;
+                // 对 j 节点进行深度优先遍历，找到 j 节点及其下属节点被通知所需的最长时间
+                ans = max(ans, dfs(j) + informTime[i]); // 这里的 + informTime[i] 表示从 i 节点到 j 节点通知所需的时间
+            &#125;
+            return ans; // 返回通知 i 节点需要的最短时间
+        &#125;;
+        // 对 headID 节点进行深度优先遍历，计算从 headID 节点开始，所有员工被通知所需的最短时间中的最大值
+        return dfs(headID);
+    &#125;
+&#125;;
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/01/4-30%E6%AF%8F%E6%97%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1609,83 +1711,6 @@ int main() &#123;
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/21/4-21%E6%AF%8F%E6%97%A5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Chris Temper">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi! Have a good day!">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/04/21/4-21%E6%AF%8F%E6%97%A5/" class="post-title-link" itemprop="url">4-21每日</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-04-21 23:52:26 / 修改时间：23:53:53" itemprop="dateCreated datePublished" datetime="2023-04-21T23:52:26+08:00">2023-04-21</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="2413-最小偶倍数"><a href="#2413-最小偶倍数" class="headerlink" title="2413. 最小偶倍数"></a>2413. 最小偶倍数</h1><p>给你一个正整数 <code>n</code> ，返回 <code>2</code> 和 <code>n</code> 的最小公倍数（正整数）。</p>
-<p> <strong>示例 1：</strong></p>
-<pre><code>输入：n = 5
-输出：10
-解释：5 和 2 的最小公倍数是 10 。
-</code></pre>
-<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>休闲</p>
-<pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">/**
- * @param &amp;#123;number&amp;#125; n
- * @return &amp;#123;number&amp;#125;
- */</span>
-<span class="token keyword">var</span> smallestEvenMultiple <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>n <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> n<span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> n <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
-</code></pre>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1755,7 +1780,7 @@ int main() &#123;
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

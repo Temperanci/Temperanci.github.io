@@ -155,6 +155,94 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/28/10-02%E6%97%A5%E7%BB%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Chris Temper">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi! Have a good day!">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/10/28/10-02%E6%97%A5%E7%BB%83/" class="post-title-link" itemprop="url">10.02日练</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-10-28 22:58:01" itemprop="dateCreated datePublished" datetime="2022-10-28T22:58:01+08:00">2022-10-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-04-11 16:47:27" itemprop="dateModified" datetime="2023-04-11T16:47:27+08:00">2023-04-11</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>单链表中的节点应该具有两个属性:val 和 next。<em>val 是当前节点的值</em>,next 是指向下一个节点的指针&#x2F;引用。<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37264323/article/details/114366943">https://blog.csdn.net/qq_37264323/article/details/114366943</a></p>
+<p>递归</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-two-sorted-lists/">https://leetcode.cn/problems/merge-two-sorted-lists/</a></p>
+<p><img src="https://files.catbox.moe/xz4ovx.JPG" alt="img"></p>
+<pre class=" language-C++"><code class="language-C++">class Solution &#123;
+public:
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) &#123;
+        if (l1 == nullptr) &#123;
+            return l2;
+        &#125;
+        else if (l2 == nullptr) &#123;
+            return l1;
+        &#125; 
+        else if (l1->val < l2->val) &#123;
+            l1->next = mergeTwoLists(l1->next, l2);
+            return l1;
+        &#125;
+        else &#123;
+            l2->next = mergeTwoLists(l1, l2->next);
+            return l2;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/08/Start-here/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -284,7 +372,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
