@@ -155,6 +155,89 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/07/5-7%E6%AF%8F%E6%97%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Chris Temper">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi! Have a good day!">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/07/5-7%E6%AF%8F%E6%97%A5/" class="post-title-link" itemprop="url">5.7每日</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-05-07 21:54:23 / 修改时间：21:59:03" itemprop="dateCreated datePublished" datetime="2023-05-07T21:54:23+08:00">2023-05-07</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1010-总持续时间可被-60-整除的歌曲"><a href="#1010-总持续时间可被-60-整除的歌曲" class="headerlink" title="1010. 总持续时间可被 60 整除的歌曲"></a>1010. 总持续时间可被 60 整除的歌曲</h1><p>在歌曲列表中，第 <code>i</code> 首歌曲的持续时间为 <code>time[i]</code> 秒。</p>
+<p>返回其总持续时间（以秒为单位）可被 <code>60</code> 整除的歌曲对的数量。形式上，我们希望下标数字 <code>i</code> 和 <code>j</code> 满足 <code>i &lt; j</code> 且有 <code>(time[i] + time[j]) % 60 == 0</code>。</p>
+<p><strong>示例 1：</strong></p>
+<pre><code>输入：time = [30,20,150,100,40]
+输出：3
+解释：这三对的总持续时间可被 60 整除：
+(time[0] = 30, time[2] = 150): 总持续时间 180
+(time[1] = 20, time[3] = 100): 总持续时间 120
+(time[1] = 20, time[4] = 40): 总持续时间 60
+</code></pre>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>hash。</p>
+<pre class=" language-C++"><code class="language-C++">class Solution &#123;
+public:
+    int numPairsDivisibleBy60(vector<int>& time) &#123;
+        vector<int> rem(60); // 定义一个长度为 60 的数组 rem，用于记录元素余数出现的次数
+        int ans = 0; // 定义一个变量 ans，用于统计符合条件的配对个数
+        for (auto t : time) &#123; // 遍历数组中的所有元素
+            int r = t % 60; // 计算元素 t 对 60 取模的余数
+            ans += rem[(60 - r) % 60]; // 先统计符合条件的配对数
+            rem[r]++; // 然后将余数为 r 的元素数量 +1，计入后续元素的配对统计中
+        &#125;
+        return ans; // 返回符合条件的配对个数
+    &#125;
+&#125;;
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/05/5-4%E9%9D%A2%E8%AF%95-%E6%90%BA%E7%A8%8B%E7%AC%94%E8%AF%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1534,260 +1617,6 @@ public:
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/22/4-22%E7%BE%8E%E5%9B%A2%E7%AC%94%E8%AF%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Chris Temper">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi! Have a good day!">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/04/22/4-22%E7%BE%8E%E5%9B%A2%E7%AC%94%E8%AF%95/" class="post-title-link" itemprop="url">4-22美团笔试</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-04-22 23:27:13" itemprop="dateCreated datePublished" datetime="2023-04-22T23:27:13+08:00">2023-04-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-04-23 15:11:35" itemprop="dateModified" datetime="2023-04-23T15:11:35+08:00">2023-04-23</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="4-22美团笔试"><a href="#4-22美团笔试" class="headerlink" title="4-22美团笔试"></a>4-22美团笔试</h1><p>19：00 - 21：00 第二个算法题没写出来，估摸着也寄了</p>
-<p>20个专业单选	10个应用算术题	2个编程题</p>
-<h2 id="1-单选"><a href="#1-单选" class="headerlink" title="1. 单选"></a>1. 单选</h2><ol>
-<li><p><strong>作业调度</strong></p>
-<p>HRRN（Highest Response Ratio Next，最高响应比优先）调度算法是一种用于作业调度的非抢占式算法，是对响应比优先（RR）算法的改进。</p>
-<p>HRRN调度算法中，每个作业的响应比定义为<strong>（等待时间 + 服务时间）&#x2F;服务时间</strong>。当一个作业被放到CPU中运行时，它的响应比将随时发生变化。每当一个作业加入就绪队列时，将对每个作业的响应比计算一次，<strong>并选取响应比最高的作业进行调度。</strong></p>
-</li>
-<li><p><strong>二叉树中序&#x2F;后序遍历</strong></p>
-<p>二叉树遍历是指按照一定的规则对二叉树中的节点进行访问。常用的二叉树遍历方式包括前序遍历、中序遍历和后序遍历。以下是它们的具体定义：</p>
-<ul>
-<li>前序遍历（先序遍历）：先访问根节点，然后访问左子树，最后访问右子树。</li>
-<li>中序遍历：先访问左子树，然后访问根节点，最后访问右子树。</li>
-<li>后序遍历：先访问左子树，然后访问右子树，最后访问根节点。</li>
-</ul>
-</li>
-<li><p><strong>同步请求子进程还是主进程</strong></p>
-<p>在浏览器环境中，同步请求通常是在<strong>主进程</strong>中执行的，而不是在子进程中执行。这是因为主进程是负责整个页面加载和渲染的进程，在执行同步请求时，它会被阻塞，直到请求完成并返回结果。如果同步请求在子进程中执行，那么子进程将会被阻塞，导致页面响应速度变慢，甚至出现假死现象。</p>
-</li>
-<li><p><strong>大数据量高并发如何缓解</strong></p>
-<p>Q：分库分表都可以缓解写入压力吗</p>
-<p>A：分库分表<strong>可以缓解单台MySQL服务器的写入压力，但是并不能完全解决高并发写入压力。</strong>因为在分库分表之后，写入压力是分散到了多台MySQL服务器上，但是每台MySQL服务器上的写入压力仍然可能会很高，会导致单台MySQL服务器的性能瓶颈和故障。分库分表只是将写入压力分散到多台服务器上，从而可以提高系统的并发能力和稳定性，但单台服务器的写入性能仍然可能成为瓶颈。</p>
-<p>Q：数据库分离可以缓解写入压力吗</p>
-<p>A：数据库分离可以缓解写入压力。在数据库分离的情况下，可以将不同的数据和应用程序分布在不同的数据库中，从而减少单个数据库的写入压力，提高整个系统的性能。</p>
-</li>
-<li><p><strong>SQL</strong></p>
-</li>
-<li><p><strong>进程 并发性</strong></p>
-<p>进程的并发性是指<strong>多个进程在同一时间内同时运行的能力</strong>。在计算机系统中，多个进程可以在同一时刻被操作系统调度到不同的 CPU 核心或者处理器中并行执行，从而实现进程的并发性。</p>
-</li>
-<li><p><strong>查找效率</strong></p>
-<p>提高查找效率的方式有很多，主要包括以下几种：</p>
-<ol>
-<li><strong>索引优化</strong>：创建合适的索引，可以大大提高查找效率。索引可以加速数据的查找以及表的连接等操作，如 B+ 树索引、哈希索引、全文索引等。</li>
-<li><strong>分区技术</strong>：在大型数据表中，可以将表根据某个字段进行分区，从而实现数据的快速查找。在进行查询时，只需要对某个分区进行查询即可，而不需要扫描整张表。</li>
-<li><strong>缓存技术</strong>：可以将常用或热门的数据缓存起来，以减少查询次数，提高查询速度，如 Redis、Memcached 等缓存技术。</li>
-<li><strong>搜索引擎</strong>：通过搭建搜索引擎，可以实现全文检索功能，提高查询效率，如 Solr、Elasticsearch 等搜索引擎。</li>
-<li><strong>分布式查询</strong>：在大型数据处理场景下，可以通过分布式查询的方式，将查询请求分散到多个节点上进行处理，提高查询效率，如 Hive、SparkSQL、Hadoop 等大数据处理框架。</li>
-</ol>
-<p>除了上述方式，还可以采用优化 SQL 语句、硬件性能优化、使用缓存或者 NoSQL 数据库等方式来提高查询效率。不同的场景和需求需要不同的优化方式进行结合使用，以满足具体的业务需求。</p>
-</li>
-<li><p><strong>epoll 查找元素的时间复杂度：O(1)</strong></p>
-<p>epoll 是一种<strong>高效的 I&#x2F;O 事件通知机制</strong>，在 Linux 操作系统中被广泛应用于网络编程中，能够有效避免传统 select 和 poll 模型中，随着监听文件描述符数量增多，事件通知效率下降的问题。epoll 的事件管理模型是基于事件触发实现的。它通过 epoll_ctl 将需要监听的 socket 文件描述符注册到 epoll 模型中，再通过 epoll_wait 系统调用来等待这些事件的发生。</p>
-<p>epoll 的<strong>时间复杂度是 O(1)<strong>，因为它用</strong>红黑树</strong>来存储文件描述符，而红黑树具有对数时间复杂度 O(logn) 的特点，它可以在一些比较大的 file descriptor 中快速定位到要处理的事件，而不需要轮询，因此效率高于 select 和 poll 模型。</p>
-<p>综上所述，epoll 作为一种高效的 I&#x2F;O 事件通知机制，它具有时间复杂度低、高效性强、可扩展性好的特点，被广泛应用于大规模高并发的网络编程中。</p>
-</li>
-<li><p><strong>BFS</strong></p>
-<p><strong>BFS（Breadth First Search），又称广度优先搜索</strong>，是从起始点开始逐层扫描整张图，先一层一层搜索，直到找到目标点为止。在搜索过程中，使用一个队列来保存每一层的所有节点，先进先出，逐层递进，直到搜索到目标节点为止。BFS 的时间复杂度为 O(|V|+|E|)，其中 |V| 表示节点个数，|E| 表示边数。</p>
-<p><strong>DFS（Depth First Search），又称深度优先搜索</strong>，是从起始点开始一直往深处搜索，直到找到目标节点为止。在搜索过程中，从起始节点开始，递归地搜索它的相邻节点，每次只选择其中一个节点继续深入，直到找到目标节点或者没有相邻节点为止。DFS 的时间复杂度为 O(|V|+|E|)，其中 |V| 表示节点个数，|E| 表示边数。</p>
-<p>BFS 和 DFS 都有各自的优缺点，在不同的应用场景中可以选择不同的算法。<strong>BFS 算法可以找到最短路径</strong>，但是需要占用大量的存储空间，其空间复杂度为 O(|V|)，<strong>当图中节点较多时，空间开销较大</strong>；<strong>DFS 算法则可以快速地搜索整张图，但是不能一定找到最短路径</strong>，<strong>存在搜索深度较深时容易陷入死循环的问题</strong>。因此，在实际应用中，需要综合考虑应用场景、搜索结果等的优缺点进行选择。</p>
-</li>
-<li><p><strong>适配器模式本质</strong></p>
-<p>适配器模式的本质是<strong>将一个已有的接口转化为另一个客户端所需要的接口，以适应不同的环境和需求</strong>。它属于结构型设计模式，可以在不改变接口前提下，将原始接口转换为目标接口，使得不兼容的类可以一起工作。</p>
-<p>适配器模式的主要作用是<strong>提高代码的复用性和可扩展性</strong>。</p>
-</li>
-<li><p><strong>递归成立的条件</strong></p>
-<p>递归需要满足以下两个条件才能实现：</p>
-<ol>
-<li><strong>递归调用</strong>：在函数体内直接或间接地调用自身。</li>
-<li><strong>结束条件</strong>：在递归调用的过程中，一定要存在一个条件，当满足这个条件时，递归调用停止，从而结束递归。</li>
-</ol>
-</li>
-<li><p><strong>SQL</strong></p>
-</li>
-<li><p><strong>图</strong></p>
-<p><strong>连通图</strong>是指无向图或有向图中，<strong>任意两个顶点之间都存在一条路径</strong>，也就是说图中的任意两个顶点都是连通的。无向图中的连通图也被称为连通分量。如果一个无向图有 k 个连通分量，则该图的连通性为 k。</p>
-<p><strong>不连通图</strong>是指无向图或有向图中，<strong>存在某些顶点之间没有直接相连的路径</strong>，也就是说图中有些顶点是不连通的。无向图中，不连通的部分可以被视为若干个由连通部分组成的图，每个连通部分都是一个连通分量。</p>
-</li>
-<li><p><strong>水题</strong></p>
-</li>
-<li><p><strong>表字段 NULL</strong></p>
-<p>非空是 NOT NULL</p>
-</li>
-<li><p><strong>ARP协议 单播 广播</strong></p>
-<p>ARP（Address Resolution Protocol）是用于将IP地址转换为MAC地址的协议，常用于局域网中。在ARP请求中，主机会向网络中的所有主机广播ARP请求，以获取某个IP地址对应的MAC地址。因此，ARP协议接收时是广播的。</p>
-</li>
-<li><p><strong>辗转相除</strong></p>
-</li>
-<li><p><strong>信号量可用资源</strong></p>
-<p>当前信号量表示目前剩余资源，临界区 &#x3D; 总信号量 - 当前信号量，等待 &#x3D; 待处理信号 - 剩余资源</p>
-</li>
-<li><p><strong>GDB打印元素</strong></p>
-<p>GDB（GNU Debugger）是一种功能强大的调试器，是 GNU 软件开发工具集的一部分。</p>
-</li>
-<li><p><strong>IMAP协议</strong></p>
-<p>IMAP（Internet Message Access Protocol，互联网邮件访问协议）是一个用于从邮件服务器上获取邮件的标准协议。</p>
-<p>IMAP协议的主要功能是让客户端可以直接在邮件服务器上管理邮件，有如下主要特点：</p>
-<ol>
-<li><strong>支持多个客户端同时访问同一个邮箱</strong>，比POP3更加适合多设备使用，如手机、平板、笔记本等。</li>
-<li><strong>支持在线邮件阅读</strong>，可实现邮件在服务器上的搜索、筛选、排序等高级功能。</li>
-<li><strong>支持邮件的部分下载</strong>，节省网络流量，提高效率。</li>
-<li>通过IMAP客户端，可以在邮件服务器上创建、删除、移动邮件，比POP3更加强大和灵活。</li>
-<li>IMAP协议和邮件本身的数据结构更加复杂，需要在服务器上消耗更多的资源和时间，因此需要更高的硬件配置。</li>
-<li>支持通过字符串搜索邮件内容。</li>
-</ol>
-<p>IMAP协议在电子邮件传输和管理中扮演着重要的角色，具有更丰富的功能和更强的灵活性，也成为了当前比较流行的邮件协议。</p>
-</li>
-</ol>
-<h2 id="2-算法题"><a href="#2-算法题" class="headerlink" title="2. 算法题"></a>2. 算法题</h2><h3 id="1-计算水题"><a href="#1-计算水题" class="headerlink" title="1. 计算水题"></a>1. 计算水题</h3><p>好久没写 C++ 了，要注意多个变量初始化的时候记得分开写。</p>
-<p>√：</p>
-<pre><code>double up = 0, down = 0;
-</code></pre>
-<p>X：</p>
-<pre><code>double up, down = 0;
-</code></pre>
-<p>写 js 写习惯了是这样的。</p>
-<pre class=" language-c++"><code class="language-c++">#include <iostream>
-using namespace std;
-int point[2000];
-int score[2000];
-
-int main()
-&#123;
-  int T;
-  scanf ("%d", &T);
-  while (T--) &#123;
-    int n, x = 0;
-    scanf("%d%d", &n, &x);
-    for (int i = 0; i < n; ++i) &#123;
-        scanf ("%d", &point[i]);
-    &#125;
-    for (int i = 0; i < n; ++i) &#123;
-        scanf ("%d", &score[i]);
-    &#125;
-
-    bool flag;
-    flag = true;
-    double up = 0, down = 0;
-    for (int i = 0; i < n; ++i) &#123;
-        if (score[i] < 60) &#123;
-            flag = false;
-            break;
-        &#125;
-    &#125;
-    if (flag == false) &#123;
-        printf("No\n");
-        continue;
-    &#125;
-    for (int i = 0; i < n; ++i) &#123;
-        up += point[i] * score[i];
-        down += point[i];
-    &#125;
-    double res = up / down;
-    if (res >= x) &#123;
-        printf("Yes\n");
-        continue;
-    &#125; else &#123;
-        printf("No\n");
-    &#125;
-  &#125;;
-  return 0;
-&#125;
-</code></pre>
-<h3 id="2-完全背包问题"><a href="#2-完全背包问题" class="headerlink" title="2. 完全背包问题"></a>2. 完全背包问题</h3><p>n种作物，m的时间，接下来三行</p>
-<p>第一行t，表示每种作物成熟所需时间</p>
-<p>第二行a，表示作物成本</p>
-<p>第三行b，表示卖出作物的价格</p>
-<p>输出最大收益</p>
-<p>c[i]&#x3D;b[i]-a[i]表示单一作物的收益</p>
-<p>f[i][j]表示可以选择前i种作物，总时间为j的情况下的最优解</p>
-<p>f[n] [m]&#x3D;&#x3D;&gt;最终结果</p>
-<p>f[ 0 ] [j]&#x3D;0<br>f[i][0]&#x3D;0</p>
-<p>状态转移方程<br>f[i][j]&#x3D;max(f [ i - 1 ] [ j ],c[i]+f[i][j-t[i]])</p>
-<p>计算第i行的时候，确定的是第i种作物种几个<br>决策：	0&#x2F;1	01背包<br>    k	完全背包</p>
-<p>for i&#x3D;1..n<br>    for j&#x3D;1..m<br>        f[i][j]&#x3D;k* c[i]+f[ i-1 ] [j-k * t[i]]</p>
-<p>把第三次循环的 k 优化掉了，原因是不需要计算同一行前一个已经计算过的冗余部分，直接拿前一个的计算结果即可，因为前面计算过的已经找到了最优的解。</p>
-<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><pre class=" language-C++"><code class="language-C++">#include <iostream>
-using namespace std;
-
-int main() &#123;
-    int n, V;
-    cin >> n >> V;
-
-    int w[n+1], v[n+1];
-    for (int i = 1; i <= n; i++) &#123;
-        cin >> w[i] >> v[i];
-    &#125;
-
-    int dp[V+1];
-    memset(dp, 0, sizeof(dp));
-
-    for (int i = 1; i <= n; i++) &#123;
-        for (int j = w[i]; j <= V; j++) &#123;
-            dp[j] = max(dp[j], dp[j-w[i]] + v[i]);
-        &#125;
-    &#125;
-
-    cout << dp[V] << endl;
-    return 0;
-&#125;
-</code></pre>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1857,7 +1686,7 @@ int main() &#123;
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
