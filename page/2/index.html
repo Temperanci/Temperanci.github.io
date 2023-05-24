@@ -155,6 +155,103 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/25/4-25%E6%AF%8F%E6%97%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Chris Temper">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hi! Have a good day!">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/04/25/4-25%E6%AF%8F%E6%97%A5/" class="post-title-link" itemprop="url">4-25每日</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-04-25 13:58:59 / 修改时间：14:07:55" itemprop="dateCreated datePublished" datetime="2023-04-25T13:58:59+08:00">2023-04-25</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="2418-按身高排序"><a href="#2418-按身高排序" class="headerlink" title="2418. 按身高排序"></a>2418. 按身高排序</h1><p>&#x3D;&#x3D;Easy&#x3D;&#x3D;</p>
+<p>给你一个字符串数组 <code>names</code> ，和一个由 <strong>互不相同</strong> 的正整数组成的数组 <code>heights</code> 。两个数组的长度均为 <code>n</code> 。</p>
+<p>对于每个下标 <code>i</code>，<code>names[i]</code> 和 <code>heights[i]</code> 表示第 <code>i</code> 个人的名字和身高。</p>
+<p>请按身高 <strong>降序</strong> 顺序返回对应的名字数组 <code>names</code> 。</p>
+<p><strong>示例 1：</strong></p>
+<pre><code>输入：names = [&quot;Mary&quot;,&quot;John&quot;,&quot;Emma&quot;], heights = [180,165,170]
+输出：[&quot;Mary&quot;,&quot;Emma&quot;,&quot;John&quot;]
+解释：Mary 最高，接着是 Emma 和 John 。
+</code></pre>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>新开一个数组 ，以序数对应 <code>names</code> 数组，值对应 <code>height</code> 数组。</p>
+<p>用选择排序更新 <code>height</code> 的值，同时更新 <code>idx[i]</code> 的值。</p>
+<p>最后更新 <code>names</code> 数组即可。</p>
+<pre class=" language-C++"><code class="language-C++">vector<string> sortNames(vector<string>& names, vector<int>& heights) &#123;
+    int n = heights.size(); // 记录人数
+    vector<int> idx(n); // 建立长度为 n 的下标数组
+    for (int i = 0; i < n; i++) &#123;
+        idx[i] = i; // 将下标数组初始化为 [0, 1, 2, ..., n-1]
+    &#125;
+
+    // 选择排序 heights，并记录下标变化
+    for (int i = 0; i < n - 1; i++) &#123; // 循环 n-1 次
+        int max_idx = i; // 记录身高最高的人的下标
+        for (int j = i + 1; j < n; j++) &#123; // 从 i+1 的位置开始循环
+            if (heights[idx[max_idx]] < heights[idx[j]]) &#123; // 如果出现更高的人
+                max_idx = j; // 更新最高的人的下标为 j
+            &#125;
+        &#125;
+        swap(idx[i], idx[max_idx]); // 将当前位置 i 和最高的人的位置 max_idx 进行交换
+    &#125;
+
+    // 按顺序将 names 中的名字加入结果数组
+    vector<string> res(n); // 建立长度为 n 的结果数组
+    for (int i = 0; i < n; i++) &#123; // 循环 n 次
+        res[i] = names[idx[i]]; // 将原始 names 中对应下标的名字存入结果数组
+    &#125;
+
+    return res; // 返回排序后的名字数组
+&#125;
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/24/4-24%E6%AF%8F%E6%97%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1432,103 +1529,6 @@ T I T .
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/14/4-14%E6%AF%8F%E6%97%A5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Chris Temper">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hi! Have a good day!">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/04/14/4-14%E6%AF%8F%E6%97%A5/" class="post-title-link" itemprop="url">4-14每日</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-04-14 14:33:05 / 修改时间：14:35:01" itemprop="dateCreated datePublished" datetime="2023-04-14T14:33:05+08:00">2023-04-14</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="1023-驼峰式匹配"><a href="#1023-驼峰式匹配" class="headerlink" title="1023. 驼峰式匹配"></a>1023. 驼峰式匹配</h1><p>如果我们可以将<strong>小写字母</strong>插入模式串 <code>pattern</code> 得到待查询项 <code>query</code>，那么待查询项与给定模式串匹配。（我们可以在任何位置插入每个字符，也可以插入 0 个字符。）</p>
-<p>给定待查询列表 <code>queries</code>，和模式串 <code>pattern</code>，返回由布尔值组成的答案列表 <code>answer</code>。只有在待查项 <code>queries[i]</code> 与模式串 <code>pattern</code> 匹配时， <code>answer[i]</code> 才为 <code>true</code>，否则为 <code>false</code>。</p>
-<p><strong>示例 1：</strong></p>
-<pre><code>输入：queries = [&quot;FooBar&quot;,&quot;FooBarTest&quot;,&quot;FootBall&quot;,&quot;FrameBuffer&quot;,&quot;ForceFeedBack&quot;], pattern = &quot;FB&quot;
-输出：[true,false,true,true,false]
-示例：
-&quot;FooBar&quot; 可以这样生成：&quot;F&quot; + &quot;oo&quot; + &quot;B&quot; + &quot;ar&quot;。
-&quot;FootBall&quot; 可以这样生成：&quot;F&quot; + &quot;oot&quot; + &quot;B&quot; + &quot;all&quot;.
-</code></pre>
-<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><pre class=" language-js"><code class="language-js"><span class="token comment" spellcheck="true">/**
- * @param &amp;#123;string[]&amp;#125; queries
- * @param &amp;#123;string&amp;#125; pattern
- * @return &amp;#123;boolean[]&amp;#125;
- */</span>
-<span class="token keyword">var</span> camelMatch <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span>queries<span class="token punctuation">,</span> pattern<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> res <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>queries <span class="token operator">||</span> queries<span class="token punctuation">.</span>length <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span> res<span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> queries<span class="token punctuation">.</span>length<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        res<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span><span class="token function">match</span><span class="token punctuation">(</span>queries<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> pattern<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> res<span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
-
-<span class="token keyword">function</span> <span class="token function">match</span><span class="token punctuation">(</span>str<span class="token punctuation">,</span> pattern<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token keyword">let</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> str<span class="token punctuation">.</span>length<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span>j <span class="token operator">&lt;</span> pattern<span class="token punctuation">.</span>length <span class="token operator">&amp;&amp;</span> str<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">===</span> pattern<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-            <span class="token operator">++</span>j<span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">// 若str出现在pattern中不存在的大写字母，则直接返回false</span>
-        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>str<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">>=</span> <span class="token string">'A'</span> <span class="token operator">&amp;&amp;</span> str<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;=</span> <span class="token string">'Z'</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> j <span class="token operator">===</span> pattern<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-</code></pre>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1598,12 +1598,12 @@ T I T .
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
